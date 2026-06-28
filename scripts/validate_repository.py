@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PLACEHOLDER_PATTERNS = ("[TO" + "DO", "T" + "BD", "your" + "-name")
 REQUIRED_ROOTS = (
     ".codex-plugin/plugin.json",
+    "TODOS.md",
     "CHANGELOG.md",
     "CONTRIBUTING.md",
     "SECURITY.md",
@@ -24,8 +25,19 @@ REQUIRED_ROOTS = (
     "docs/demo-transcripts/README.md",
     "docs/examples/README.md",
     "docs/release-process.md",
+    "docs/session-lifecycle.md",
+    "references/audit-and-cost.md",
+    "references/agent-hierarchy.md",
     "references/codex-adaptation-map.md",
+    "references/decision-protocol.md",
+    "references/design-theory.md",
+    "references/review-modes.md",
+    "references/path-rule-map.md",
+    "references/security-policy.md",
     "references/engine-modules/README.md",
+    "references/engines/godot-specialists.md",
+    "references/engines/unity-specialists.md",
+    "references/engines/unreal-specialists.md",
     "references/roles/coordination-recipes.md",
     "references/templates/accessibility-requirements.md",
     "references/templates/pitch-document.md",
@@ -33,6 +45,8 @@ REQUIRED_ROOTS = (
     "references/templates/incident-response.md",
     "references/templates/post-mortem.md",
     "references/templates/collaborative-protocols.md",
+    "scripts/check_assets.py",
+    "scripts/detect_gaps.py",
     "scripts/render_forward_tests.py",
     "skills",
     "references",
@@ -42,11 +56,15 @@ REQUIRED_ROOTS = (
     "references/engines",
     "tests/skill-catalog.json",
     "tests/forward-tests.json",
+    "tests/command-specs.json",
+    "tests/hook-replacements.json",
     "tests/expected-outputs",
     "references/quality-rubric.md",
 )
 ENGINES = ("godot", "unity", "unreal", "web")
 ENGINE_MODULES = ("input", "ui", "save", "build", "networking", "performance", "rendering")
+MIN_COMMAND_SPECS = {"/code-review", "/consistency-check", "/balance-check", "/scope-check", "/tech-debt", "/test-setup", "/test-flakiness", "/reverse-document", "/localize"}
+HOOK_COUNT = 12
 
 
 def fail(message: str) -> None:
@@ -81,8 +99,6 @@ def parse_frontmatter(path: Path) -> dict[str, str]:
 
 
 def validate_required_paths() -> None:
-    if (ROOT / "TODOS.md").exists():
-        fail("TODOS.md should be removed after tracked migration work is complete")
     for rel in REQUIRED_ROOTS:
         if not (ROOT / rel).exists():
             fail(f"Missing required path: {rel}")
@@ -158,6 +174,34 @@ def validate_forward_tests(skills: set[str]) -> None:
             fail(f"{label} has missing expected_output_path: {expected_path}")
 
 
+def validate_command_specs() -> None:
+    specs = load_json(ROOT / "tests" / "command-specs.json")
+    commands = specs.get("commands")
+    if not isinstance(commands, list):
+        fail("tests/command-specs.json missing commands list")
+    names = {entry.get("command") for entry in commands}
+    missing = sorted(MIN_COMMAND_SPECS - names)
+    if missing:
+        fail(f"Command specs missing: {missing}")
+    for entry in commands:
+        label = f"Command spec {entry.get('command')}"
+        if not entry.get("skill"):
+            fail(f"{label} missing skill")
+        validate_reference_list(entry.get("references", []), label)
+        if not isinstance(entry.get("expected"), list) or len(entry["expected"]) < 2:
+            fail(f"{label} needs expected behavior list")
+
+
+def validate_hook_replacements() -> None:
+    data = load_json(ROOT / "tests" / "hook-replacements.json")
+    replacements = data.get("replacements")
+    if not isinstance(replacements, list) or len(replacements) != HOOK_COUNT:
+        fail(f"Expected {HOOK_COUNT} hook replacements")
+    for entry in replacements:
+        if not entry.get("claude_hook") or not entry.get("codex_replacement"):
+            fail("Hook replacement missing hook or replacement")
+
+
 def validate_reference_list(refs: list[str], label: str) -> None:
     if not isinstance(refs, list) or not refs:
         fail(f"{label} needs required references")
@@ -204,9 +248,15 @@ def main() -> None:
     skills = validate_skills()
     validate_catalog(skills)
     validate_forward_tests(skills)
+    validate_command_specs()
+    validate_hook_replacements()
     validate_no_placeholders()
     validate_no_control_characters()
-    print(f"Repository validation passed: {len(skills)} skills, {len(skills)} forward tests, {len(ENGINES) * len(ENGINE_MODULES)} engine modules")
+    print(
+        f"Repository validation passed: {len(skills)} skills, "
+        f"{len(skills)} forward tests, {len(MIN_COMMAND_SPECS)} command specs, "
+        f"{len(ENGINES) * len(ENGINE_MODULES)} engine modules"
+    )
 
 
 if __name__ == "__main__":

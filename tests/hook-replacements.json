@@ -1,0 +1,65 @@
+{
+    "version":  1,
+    "replacements":  [
+                         {
+                             "claude_hook":  "validate-commit.sh",
+                             "codex_replacement":  "scripts/validate_repository.py",
+                             "purpose":  "Repository quality gate"
+                         },
+                         {
+                             "claude_hook":  "validate-push.sh",
+                             "codex_replacement":  ".github/workflows/validate.yml",
+                             "purpose":  "Remote validation on push and pull request"
+                         },
+                         {
+                             "claude_hook":  "validate-assets.sh",
+                             "codex_replacement":  "scripts/check_assets.py",
+                             "purpose":  "Asset naming and JSON checks"
+                         },
+                         {
+                             "claude_hook":  "session-start.sh",
+                             "codex_replacement":  "docs/session-lifecycle.md",
+                             "purpose":  "Explicit start checklist"
+                         },
+                         {
+                             "claude_hook":  "detect-gaps.sh",
+                             "codex_replacement":  "scripts/detect_gaps.py",
+                             "purpose":  "Project artifact gap check"
+                         },
+                         {
+                             "claude_hook":  "pre-compact.sh",
+                             "codex_replacement":  "docs/session-lifecycle.md",
+                             "purpose":  "Manual context checkpoint"
+                         },
+                         {
+                             "claude_hook":  "post-compact.sh",
+                             "codex_replacement":  "docs/session-lifecycle.md",
+                             "purpose":  "Manual resume checklist"
+                         },
+                         {
+                             "claude_hook":  "notify.sh",
+                             "codex_replacement":  "Codex final/status messages",
+                             "purpose":  "Human-visible status"
+                         },
+                         {
+                             "claude_hook":  "session-stop.sh",
+                             "codex_replacement":  "docs/session-lifecycle.md",
+                             "purpose":  "Stop checklist and evidence summary"
+                         },
+                         {
+                             "claude_hook":  "log-agent.sh",
+                             "codex_replacement":  "references/audit-and-cost.md",
+                             "purpose":  "Decision audit note"
+                         },
+                         {
+                             "claude_hook":  "log-agent-stop.sh",
+                             "codex_replacement":  "references/audit-and-cost.md",
+                             "purpose":  "Decision audit completion"
+                         },
+                         {
+                             "claude_hook":  "validate-skill-change.sh",
+                             "codex_replacement":  "skill validation plus scripts/validate_repository.py",
+                             "purpose":  "Skill-change reminder and validation"
+                         }
+                     ]
+}

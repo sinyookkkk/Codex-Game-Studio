@@ -9,6 +9,8 @@ Use this skill when work shifts from building features to shipping, stabilizing,
 
 ## Required references
 
+- Read `../../references/audit-and-cost.md` when release decisions need a durable decision trail.
+
 - Read `../../references/templates/release-checklist.md` for release readiness.
 - Read `../../references/templates/release-notes.md` or `../../references/templates/changelog-template.md` for player-facing and internal notes.
 - Read `../../references/engine-routing.md`, then the matching `../../references/engines/*.md` file when packaging differs by engine.

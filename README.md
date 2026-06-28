@@ -25,6 +25,8 @@ This repository is designed to be shared on GitHub and installed as a Codex plug
 - `tests/expected-outputs/`: expected output shapes for every forward test.
 - `docs/examples/` and `docs/demo-transcripts/`: public usage examples for GitHub readers.
 - `references/codex-adaptation-map.md`: Claude-to-Codex feature replacement map.
+- `references/design-theory.md`, `references/decision-protocol.md`, `references/agent-hierarchy.md`, and `references/review-modes.md`: deeper studio intelligence references.
+- `tests/command-specs.json` and `tests/hook-replacements.json`: command-level parity and hook replacement specs.
 
 The plugin intentionally does not port every Claude Code slash command one-for-one. Codex works better with a smaller set of high-signal skills and references that load progressively.
 
@@ -102,4 +104,4 @@ If you publish this repository, keep the attribution and MIT license text.
 
 ## Status
 
-Version `0.6.0` completes the tracked migration items and removes the standalone roadmap file.
+Version `0.7.0` adds design theory, decision protocols, review modes, path-rule mapping, hook replacements, command specs, and deeper engine specialist references.

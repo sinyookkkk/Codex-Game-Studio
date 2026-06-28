@@ -9,6 +9,10 @@ Use this skill to turn game quality concerns into practical verification steps a
 
 ## Required references
 
+- Use `../../scripts/detect_gaps.py` for lightweight missing-artifact detection.
+
+- Use `../../scripts/check_assets.py` for asset folder sanity checks when a project has assets.
+
 - Read `../../references/templates/test-plan.md` when creating a QA plan.
 - Read `../../references/templates/test-evidence.md` when collecting or reviewing evidence.
 - Read `../../references/templates/vertical-slice-report.md` or `../../references/templates/prototype-report.md` for playable validation.

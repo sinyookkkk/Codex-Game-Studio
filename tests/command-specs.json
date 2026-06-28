@@ -1,0 +1,115 @@
+{
+    "commands":  [
+                     {
+                         "expected":  [
+                                          "Use technical director, lead programmer, and QA lenses",
+                                          "List correctness, maintainability, performance, and test gaps"
+                                      ],
+                         "command":  "/code-review",
+                         "skill":  "game-studio-gate",
+                         "references":  [
+                                            "references/rules/gameplay-code.md",
+                                            "references/rules/engine-code.md",
+                                            "references/review-modes.md"
+                                        ]
+                     },
+                     {
+                         "expected":  [
+                                          "Check output against pillars, player promise, and prior decisions",
+                                          "Identify contradictions and required user decisions"
+                                      ],
+                         "command":  "/consistency-check",
+                         "skill":  "game-studio-gate",
+                         "references":  [
+                                            "references/design-theory.md",
+                                            "references/decision-protocol.md"
+                                        ]
+                     },
+                     {
+                         "expected":  [
+                                          "Apply flow, competence, and target player motivation",
+                                          "Return tuning risks and playtest evidence"
+                                      ],
+                         "command":  "/balance-check",
+                         "skill":  "game-studio-design",
+                         "references":  [
+                                            "references/design-theory.md",
+                                            "references/templates/difficulty-curve.md"
+                                        ]
+                     },
+                     {
+                         "expected":  [
+                                          "Separate keep, cut, defer, and spike",
+                                          "Recommend smallest playable promise-preserving scope"
+                                      ],
+                         "command":  "/scope-check",
+                         "skill":  "game-studio-flow",
+                         "references":  [
+                                            "references/decision-protocol.md",
+                                            "references/review-modes.md"
+                                        ]
+                     },
+                     {
+                         "expected":  [
+                                          "Rank debt by player risk and change cost",
+                                          "Suggest verification and refactor boundaries"
+                                      ],
+                         "command":  "/tech-debt",
+                         "skill":  "game-studio-architecture",
+                         "references":  [
+                                            "references/path-rule-map.md",
+                                            "references/security-policy.md"
+                                        ]
+                     },
+                     {
+                         "expected":  [
+                                          "Recommend test structure and first smoke/regression examples",
+                                          "Define evidence capture"
+                                      ],
+                         "command":  "/test-setup",
+                         "skill":  "game-studio-qa",
+                         "references":  [
+                                            "references/rules/test-standards.md",
+                                            "references/path-rule-map.md"
+                                        ]
+                     },
+                     {
+                         "expected":  [
+                                          "Classify nondeterminism, timing, data, and environment causes",
+                                          "Recommend isolation and repeatability evidence"
+                                      ],
+                         "command":  "/test-flakiness",
+                         "skill":  "game-studio-qa",
+                         "references":  [
+                                            "references/rules/test-standards.md",
+                                            "references/decision-protocol.md"
+                                        ]
+                     },
+                     {
+                         "expected":  [
+                                          "Infer current systems from files",
+                                          "Produce missing docs and risk list"
+                                      ],
+                         "command":  "/reverse-document",
+                         "skill":  "game-studio-onboarding",
+                         "references":  [
+                                            "references/workflow-catalog.md",
+                                            "references/path-rule-map.md"
+                                        ]
+                     },
+                     {
+                         "expected":  [
+                                          "Use localization lead and UX/accessibility lenses",
+                                          "Identify text, layout, cultural, and release risks"
+                                      ],
+                         "command":  "/localize",
+                         "skill":  "game-studio-release",
+                         "references":  [
+                                            "references/roles/studio-roles.md",
+                                            "references/templates/accessibility-requirements.md"
+                                        ]
+                     }
+                 ],
+    "description":  "Command-level parity specs for Claude Code Game Studios commands that need more explicit Codex behavior.",
+    "version":  1
+}

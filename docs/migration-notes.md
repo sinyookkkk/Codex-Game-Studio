@@ -35,3 +35,11 @@ Version `0.6.0` completes the tracked migration items:
 ## Why consolidate
 
 Codex skills are most useful when they provide concise routing and load detailed references only when needed. A direct 73-skill migration would be harder to maintain and would duplicate many overlapping workflows.
+Version `0.7.0` adds the deep studio-intelligence layer:
+
+- Game design theory for MDA, SDT, flow, and Bartle player motivation.
+- User-owned decision protocol, review modes, and studio hierarchy.
+- Path rule mapping and Codex-native replacements for Claude hooks.
+- Security, audit, session lifecycle, and cost-control references.
+- Deeper Godot, Unity, and Unreal specialist notes.
+- Command-level specs for high-risk workflow commands.

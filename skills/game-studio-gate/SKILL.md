@@ -9,6 +9,10 @@ Use this skill to review evidence before advancing a game project. It adapts Cla
 
 ## Required references
 
+- Read `../../references/agent-hierarchy.md` when resolving cross-role disagreement.
+
+- Read `../../references/review-modes.md` to choose solo, lean, or full review depth.
+
 - Read `../../references/workflow-catalog.md` to identify expected phase artifacts.
 - Read `../../references/role-routing.md` to choose review lenses.
 - Read `../../references/templates.md` when recommending missing artifacts.

@@ -9,6 +9,10 @@ Use this skill to evaluate or create design decisions through player behavior, f
 
 ## Required references
 
+- Read `../../references/decision-protocol.md` when the design choice has real tradeoffs.
+
+- Read `../../references/design-theory.md` for MDA, SDT, flow, and player motivation checks.
+
 - Read `../../references/templates.md` to choose a template.
 - Read a specific file from `../../references/templates/` when drafting concepts, systems, UX, art bible, levels, economy, difficulty, or narrative artifacts.
 - Read `../../references/role-routing.md` when the design needs separate creative, systems, UX, art, narrative, or production lenses.

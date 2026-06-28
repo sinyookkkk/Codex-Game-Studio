@@ -9,6 +9,8 @@ Use this skill as the entry point for a game project. It replaces Claude Code sl
 
 ## Required references
 
+- Read `../../docs/session-lifecycle.md` when starting, resuming, or stopping a long project session.
+
 - Read `../../references/workflow-catalog.md` before recommending a phase or next step.
 - Read `../../references/command-mapping.md` when translating a Claude Code Game Studios command to a Codex workflow.
 - Read `../../references/engine-routing.md`, then the matching `../../references/engines/*.md` file when engine setup or engine choice matters.

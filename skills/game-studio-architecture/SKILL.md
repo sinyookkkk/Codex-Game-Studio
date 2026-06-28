@@ -9,6 +9,10 @@ Use this skill to turn game design into implementation-ready technical structure
 
 ## Required references
 
+- Read `../../references/security-policy.md` for destructive, secret, network, save-data, or release-risk operations.
+
+- Read `../../references/path-rule-map.md` when project paths imply specific coding or documentation rules.
+
 - Read `../../references/workflow-catalog.md` when architecture readiness depends on phase.
 - Read `../../references/engine-routing.md`, then the matching `../../references/engines/*.md` file when engine-specific patterns matter.
 - Read `../../references/role-routing.md` and `../../references/roles/studio-roles.md` when choosing technical review lenses.
