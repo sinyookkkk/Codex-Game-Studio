@@ -7,12 +7,16 @@ import json
 import re
 import sys
 from pathlib import Path
+from typing import Any, Iterator
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PLACEHOLDER_PATTERNS = ("TODO", "TBD", "[TODO", "your-name")
+PLACEHOLDER_PATTERNS = ("[TODO", "TBD", "your-name")
 REQUIRED_ROOTS = (
     ".codex-plugin/plugin.json",
+    "TODOS.md",
+    "docs/codex-usage-guide.md",
+    "references/codex-adaptation-map.md",
     "skills",
     "references",
     "references/templates",
@@ -20,6 +24,7 @@ REQUIRED_ROOTS = (
     "references/rules",
     "references/engines",
     "tests/skill-catalog.json",
+    "tests/forward-tests.json",
     "references/quality-rubric.md",
 )
 
@@ -29,14 +34,14 @@ def fail(message: str) -> None:
     sys.exit(1)
 
 
-def load_json(path: Path) -> dict:
+def load_json(path: Path) -> dict[str, Any]:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception as exc:  # pragma: no cover - diagnostic path
         fail(f"Could not parse JSON {path.relative_to(ROOT)}: {exc}")
 
 
-def parse_frontmatter(path: Path) -> dict:
+def parse_frontmatter(path: Path) -> dict[str, str]:
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---\n"):
         fail(f"{path.relative_to(ROOT)} missing YAML frontmatter")
@@ -107,12 +112,41 @@ def validate_catalog(skills: set[str]) -> None:
         refs = entry.get("required_references", [])
         if not refs:
             fail(f"Catalog entry {entry.get('name')} has no required references")
-        for rel in refs:
-            if not (ROOT / rel).exists():
-                fail(f"Catalog entry {entry.get('name')} references missing file: {rel}")
+        validate_reference_list(refs, f"Catalog entry {entry.get('name')}")
 
 
-def validate_no_placeholders() -> None:
+def validate_forward_tests(skills: set[str]) -> None:
+    suite = load_json(ROOT / "tests" / "forward-tests.json")
+    cases = suite.get("cases")
+    if not isinstance(cases, list):
+        fail("tests/forward-tests.json missing cases list")
+    case_skills = {case.get("skill") for case in cases}
+    if case_skills != skills:
+        missing = sorted(skills - case_skills)
+        extra = sorted(case_skills - skills)
+        fail(f"Forward-test skill coverage mismatch. Missing={missing} Extra={extra}")
+    for index, case in enumerate(cases, start=1):
+        label = f"Forward test case {index} ({case.get('skill')})"
+        if not isinstance(case.get("prompt"), str) or len(case["prompt"].strip()) < 40:
+            fail(f"{label} needs a realistic prompt")
+        evidence = case.get("expected_evidence")
+        if not isinstance(evidence, list) or len(evidence) < 3:
+            fail(f"{label} needs at least three expected evidence checks")
+        refs = case.get("required_references")
+        if not isinstance(refs, list) or not refs:
+            fail(f"{label} needs required_references")
+        validate_reference_list(refs, label)
+
+
+def validate_reference_list(refs: list[str], label: str) -> None:
+    for rel in refs:
+        if not isinstance(rel, str) or not rel:
+            fail(f"{label} has invalid reference path: {rel!r}")
+        if not (ROOT / rel).exists():
+            fail(f"{label} references missing file: {rel}")
+
+
+def iter_checked_text_files() -> Iterator[Path]:
     ignored_parts = {".git"}
     checked_suffixes = {".md", ".json", ".yml", ".yaml"}
     for path in ROOT.rglob("*"):
@@ -120,10 +154,29 @@ def validate_no_placeholders() -> None:
             continue
         if any(part in ignored_parts for part in path.parts):
             continue
+        yield path
+
+
+def validate_no_placeholders() -> None:
+    for path in iter_checked_text_files():
         text = path.read_text(encoding="utf-8", errors="ignore")
         for pattern in PLACEHOLDER_PATTERNS:
             if pattern in text:
                 fail(f"Placeholder pattern {pattern!r} found in {path.relative_to(ROOT)}")
+
+
+def validate_no_control_characters() -> None:
+    allowed = {"\n", "\r", "\t"}
+    for path in iter_checked_text_files():
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for index, char in enumerate(text):
+            if char in allowed:
+                continue
+            if ord(char) < 32 or ord(char) == 127:
+                fail(
+                    f"Control character U+{ord(char):04X} found in "
+                    f"{path.relative_to(ROOT)} at offset {index}"
+                )
 
 
 def main() -> None:
@@ -131,8 +184,10 @@ def main() -> None:
     validate_plugin()
     skills = validate_skills()
     validate_catalog(skills)
+    validate_forward_tests(skills)
     validate_no_placeholders()
-    print(f"Repository validation passed: {len(skills)} skills")
+    validate_no_control_characters()
+    print(f"Repository validation passed: {len(skills)} skills, {len(skills)} forward tests")
 
 
 if __name__ == "__main__":

@@ -21,7 +21,10 @@ This repository is designed to be shared on GitHub and installed as a Codex plug
 - `references/rules/`: 11 coding and content rules adapted from Claude Code Game Studios path-scoped rules.
 - `references/engines/`: Godot, Unity, Unreal, and web-specific routing notes.
 - `tests/skill-catalog.json`: validation catalog for the Codex skill surface.
+- `tests/forward-tests.json`: realistic prompts and expected evidence for each Codex skill.
 - `references/quality-rubric.md`: quality rubric for skills, references, workflows, and release checks.
+- `docs/codex-usage-guide.md`: install, validation, routing, and prompt guidance for Codex users.
+- `references/codex-adaptation-map.md`: Claude-to-Codex feature replacement map.
 
 The plugin intentionally does not port every Claude Code slash command one-for-one. Codex works better with a smaller set of high-signal skills and references that load progressively.
 
@@ -51,10 +54,19 @@ Prepare a launch checklist and patch notes template.
 Run the repository validator before publishing changes:
 
 ```bash
+# Linux/macOS
+sh scripts/validate_repository.sh
+
+# Any platform with Python 3
 python scripts/validate_repository.py
 ```
 
-The validator checks the plugin manifest, skill frontmatter, skill catalog, required reference files, and placeholder text. GitHub Actions runs the same command on pushes and pull requests.
+```powershell
+# Windows PowerShell / PowerShell Core
+.\scripts\validate_repository.ps1
+```
+
+The validator checks the plugin manifest, skill frontmatter, skill catalog, forward tests, required reference files, placeholder text, and invalid control characters. GitHub Actions runs validation on Ubuntu, macOS, and Windows for pushes and pull requests.
 
 ## Repository layout
 
@@ -65,6 +77,8 @@ The validator checks the plugin manifest, skill frontmatter, skill catalog, requ
   validate.yml
 scripts/
   validate_repository.py
+  validate_repository.sh
+  validate_repository.ps1
 skills/
   game-studio-onboarding/
   game-studio-flow/
@@ -75,7 +89,9 @@ skills/
   game-studio-release/
 tests/
   skill-catalog.json
+  forward-tests.json
 references/
+  codex-adaptation-map.md
   command-mapping.md
   engine-routing.md
   engines/
@@ -86,6 +102,10 @@ references/
   templates/
   templates.md
   workflow-catalog.md
+docs/
+  codex-usage-guide.md
+  github-release-checklist.md
+  migration-notes.md
 ```
 
 ## Claude Code Game Studios parity
@@ -97,8 +117,13 @@ Claude Code Game Studios uses Claude Code-specific agents, slash commands, hooks
 - Claude subagents map to role lenses in `references/roles/studio-roles.md`.
 - Claude path-scoped rules map to `references/rules/`.
 - Claude document templates map to `references/templates/`.
-- Claude skill testing concepts map to `tests/skill-catalog.json`, `references/quality-rubric.md`, and `scripts/validate_repository.py`.
+- Claude hooks, settings, and statusline scripts map to the replacement strategy in `references/codex-adaptation-map.md`.
+- Claude skill testing concepts map to `tests/skill-catalog.json`, `tests/forward-tests.json`, `references/quality-rubric.md`, and `scripts/validate_repository.py`.
 - Codex-native skill frontmatter uses only `name` and `description`.
+
+## Remaining migration work
+
+See `TODOS.md` for the current gap list and completion roadmap.
 
 ## Attribution
 
@@ -108,4 +133,4 @@ If you publish this repository, keep the attribution and MIT license text.
 
 ## Status
 
-Version `0.4.0` adds the third parity layer: validation catalog, quality rubric, repository validator, and GitHub Actions.
+Version `0.5.0` adds migration TODOs, Codex usage guidance, an adaptation map, and forward-test validation.

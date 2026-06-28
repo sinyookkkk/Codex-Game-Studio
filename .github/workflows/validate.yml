@@ -6,7 +6,11 @@ on:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -16,5 +20,11 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Validate repository
-        run: python scripts/validate_repository.py
+      - name: Validate repository on Linux and macOS
+        if: runner.os != 'Windows'
+        run: sh scripts/validate_repository.sh
+
+      - name: Validate repository on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/validate_repository.ps1

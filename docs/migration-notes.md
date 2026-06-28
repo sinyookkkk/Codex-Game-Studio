@@ -32,7 +32,7 @@ Version `0.3.0` added the second parity layer:
 
 ## Phase 3 alignment
 
-Version `0.4.0` adds the third parity layer:
+Version `0.4.0` added the third parity layer:
 
 - `tests/skill-catalog.json` as a lightweight equivalent of the CCGS skill catalog.
 - `references/quality-rubric.md` for skill, reference, workflow, and release quality checks.
@@ -42,6 +42,25 @@ Version `0.4.0` adds the third parity layer:
 ## Why consolidate
 
 Codex skills are most useful when they provide concise routing and load detailed references only when needed. A direct 73-skill migration would be harder to maintain and would duplicate many overlapping workflows.
+
+## Cross-platform validation
+
+Version `0.4.1` adds:
+
+- `scripts/validate_repository.sh` for Linux and macOS.
+- `scripts/validate_repository.ps1` for Windows PowerShell and PowerShell Core.
+- `.gitattributes` rules to keep scripts and repository metadata with predictable line endings.
+- A GitHub Actions matrix that validates Ubuntu, macOS, and Windows.
+
+## Phase 4 alignment
+
+Version `0.5.0` adds the fourth parity layer:
+
+- `TODOS.md` to track the remaining migration gap by feature area.
+- `docs/codex-usage-guide.md` to make plugin usage self-contained for Codex users.
+- `references/codex-adaptation-map.md` to document replacements for Claude slash commands, agents, hooks, settings, and testing concepts.
+- `tests/forward-tests.json` to give every Codex skill a realistic prompt and expected evidence checks.
+- Validator coverage for the new forward-test suite.
 
 ## Future expansion
 

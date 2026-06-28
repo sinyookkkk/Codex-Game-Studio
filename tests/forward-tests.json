@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "description": "Forward-test prompts for the Codex-native skill surface. Each case should be usable by a fresh Codex session without hidden context.",
+  "cases": [
+    {
+      "skill": "game-studio-onboarding",
+      "prompt": "Use Codex Game Studio to adopt this existing game project, infer its current phase, identify missing artifacts, and recommend the next playable step.",
+      "expected_evidence": [
+        "Names the inferred project phase",
+        "Lists inspected artifacts or missing artifacts",
+        "Routes to one or more follow-up skills",
+        "Gives one small next step with validation"
+      ],
+      "required_references": [
+        "references/workflow-catalog.md",
+        "references/engine-routing.md"
+      ]
+    },
+    {
+      "skill": "game-studio-design",
+      "prompt": "Draft a compact game concept and core loop for a two-week prototype, then identify the top design risks and playtest questions.",
+      "expected_evidence": [
+        "States player promise and target experience",
+        "Defines core loop and success criteria",
+        "Calls out design risks",
+        "Produces playtest questions"
+      ],
+      "required_references": [
+        "references/templates/game-concept.md",
+        "references/templates/game-design-document.md"
+      ]
+    },
+    {
+      "skill": "game-studio-architecture",
+      "prompt": "Create an ADR for save data, scene loading, and platform storage risk in a small Godot game.",
+      "expected_evidence": [
+        "States decision context",
+        "Compares options",
+        "Records chosen decision and consequences",
+        "Mentions engine-specific constraints"
+      ],
+      "required_references": [
+        "references/templates/architecture-decision-record.md",
+        "references/engines/godot.md"
+      ]
+    },
+    {
+      "skill": "game-studio-flow",
+      "prompt": "Turn this loose game idea into a vertical-slice plan with milestones, tasks, acceptance criteria, and a smoke test path.",
+      "expected_evidence": [
+        "Defines a small playable milestone",
+        "Breaks work into ordered tasks",
+        "Adds acceptance criteria",
+        "Includes a run or verification path"
+      ],
+      "required_references": [
+        "references/workflow-catalog.md",
+        "references/templates/vertical-slice-report.md"
+      ]
+    },
+    {
+      "skill": "game-studio-gate",
+      "prompt": "Review whether this project can move from prototype to vertical slice and return PASS, CONCERNS, or FAIL with required evidence.",
+      "expected_evidence": [
+        "Returns PASS, CONCERNS, or FAIL",
+        "Lists blocking and non-blocking issues",
+        "Maps findings to phase expectations",
+        "Names evidence required for advancement"
+      ],
+      "required_references": [
+        "references/workflow-catalog.md",
+        "references/quality-rubric.md"
+      ]
+    },
+    {
+      "skill": "game-studio-qa",
+      "prompt": "Create a smoke test and regression checklist for a playable build, including evidence to capture before release review.",
+      "expected_evidence": [
+        "Separates smoke and regression checks",
+        "Prioritizes release-blocking risks",
+        "Defines evidence artifacts",
+        "Includes bug triage guidance"
+      ],
+      "required_references": [
+        "references/templates/test-plan.md",
+        "references/templates/test-evidence.md"
+      ]
+    },
+    {
+      "skill": "game-studio-release",
+      "prompt": "Prepare a release checklist, known issues note, patch notes outline, and hotfix triage plan for an indie game build.",
+      "expected_evidence": [
+        "Covers build readiness",
+        "Drafts player-facing release notes",
+        "Names known issue handling",
+        "Defines hotfix triage criteria"
+      ],
+      "required_references": [
+        "references/templates/release-checklist.md",
+        "references/templates/release-notes.md"
+      ]
+    }
+  ]
+}
