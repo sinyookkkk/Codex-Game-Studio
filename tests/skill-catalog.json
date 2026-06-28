@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "name": "game-studio-onboarding",
+      "priority": "critical",
+      "category": "onboarding",
+      "required_references": [
+        "references/workflow-catalog.md",
+        "references/command-mapping.md",
+        "references/engine-routing.md",
+        "references/templates.md"
+      ]
+    },
+    {
+      "name": "game-studio-flow",
+      "priority": "critical",
+      "category": "production",
+      "required_references": [
+        "references/workflow-catalog.md",
+        "references/studio-workflow.md",
+        "references/role-routing.md",
+        "references/templates.md"
+      ]
+    },
+    {
+      "name": "game-studio-design",
+      "priority": "critical",
+      "category": "design",
+      "required_references": [
+        "references/templates.md",
+        "references/role-routing.md",
+        "references/workflow-catalog.md",
+        "references/rules/design-docs.md"
+      ]
+    },
+    {
+      "name": "game-studio-architecture",
+      "priority": "high",
+      "category": "architecture",
+      "required_references": [
+        "references/workflow-catalog.md",
+        "references/engine-routing.md",
+        "references/templates/technical-design-document.md",
+        "references/templates/architecture-decision-record.md"
+      ]
+    },
+    {
+      "name": "game-studio-gate",
+      "priority": "critical",
+      "category": "gate",
+      "required_references": [
+        "references/workflow-catalog.md",
+        "references/role-routing.md",
+        "references/templates.md"
+      ]
+    },
+    {
+      "name": "game-studio-qa",
+      "priority": "high",
+      "category": "qa",
+      "required_references": [
+        "references/templates/test-plan.md",
+        "references/templates/test-evidence.md",
+        "references/rules/test-standards.md",
+        "references/workflow-catalog.md"
+      ]
+    },
+    {
+      "name": "game-studio-release",
+      "priority": "high",
+      "category": "release",
+      "required_references": [
+        "references/templates/release-checklist.md",
+        "references/templates/release-notes.md",
+        "references/role-routing.md",
+        "references/rules/test-standards.md"
+      ]
+    }
+  ]
+}

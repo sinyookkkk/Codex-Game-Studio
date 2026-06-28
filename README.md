@@ -14,12 +14,14 @@ This repository is designed to be shared on GitHub and installed as a Codex plug
 - `game-studio-qa`: smoke tests, regression checks, playtest reports, bug triage, and evidence collection.
 - `game-studio-release`: release readiness, launch checklists, patch notes, hotfix flow, and post-release retrospectives.
 
-## Second-stage parity assets
+## Parity assets
 
 - `references/templates/`: compact document templates for concepts, GDDs, systems, UX, art, architecture, sprint planning, QA, release, and changelogs.
 - `references/roles/`: 49 studio role cards adapted into Codex review lenses.
 - `references/rules/`: 11 coding and content rules adapted from Claude Code Game Studios path-scoped rules.
 - `references/engines/`: Godot, Unity, Unreal, and web-specific routing notes.
+- `tests/skill-catalog.json`: validation catalog for the Codex skill surface.
+- `references/quality-rubric.md`: quality rubric for skills, references, workflows, and release checks.
 
 The plugin intentionally does not port every Claude Code slash command one-for-one. Codex works better with a smaller set of high-signal skills and references that load progressively.
 
@@ -34,6 +36,7 @@ Clone this repository, then install it through the Codex plugin flow for local p
 After installing, ask Codex for tasks such as:
 
 ```text
+Validate this Codex Game Studio plugin.
 Find my current game development phase and tell me what to do next.
 Draft a game concept using the Codex Game Studio template.
 Review my combat design with game designer, UX, and QA lenses.
@@ -43,11 +46,25 @@ Create a smoke test checklist for my Godot build.
 Prepare a launch checklist and patch notes template.
 ```
 
+## Validation
+
+Run the repository validator before publishing changes:
+
+```bash
+python scripts/validate_repository.py
+```
+
+The validator checks the plugin manifest, skill frontmatter, skill catalog, required reference files, and placeholder text. GitHub Actions runs the same command on pushes and pull requests.
+
 ## Repository layout
 
 ```text
 .codex-plugin/
   plugin.json
+.github/workflows/
+  validate.yml
+scripts/
+  validate_repository.py
 skills/
   game-studio-onboarding/
   game-studio-flow/
@@ -56,10 +73,13 @@ skills/
   game-studio-gate/
   game-studio-qa/
   game-studio-release/
+tests/
+  skill-catalog.json
 references/
   command-mapping.md
   engine-routing.md
   engines/
+  quality-rubric.md
   role-routing.md
   roles/
   rules/
@@ -77,7 +97,7 @@ Claude Code Game Studios uses Claude Code-specific agents, slash commands, hooks
 - Claude subagents map to role lenses in `references/roles/studio-roles.md`.
 - Claude path-scoped rules map to `references/rules/`.
 - Claude document templates map to `references/templates/`.
-- Claude hooks are not ported yet; validation currently relies on explicit Codex checks.
+- Claude skill testing concepts map to `tests/skill-catalog.json`, `references/quality-rubric.md`, and `scripts/validate_repository.py`.
 - Codex-native skill frontmatter uses only `name` and `description`.
 
 ## Attribution
@@ -88,4 +108,4 @@ If you publish this repository, keep the attribution and MIT license text.
 
 ## Status
 
-Version `0.3.0` adds the second parity layer: template library, role cards, coding rules, and engine-specific references.
+Version `0.4.0` adds the third parity layer: validation catalog, quality rubric, repository validator, and GitHub Actions.

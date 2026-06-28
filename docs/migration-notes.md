@@ -22,13 +22,22 @@ Version `0.2.0` added the first parity layer:
 
 ## Phase 2 alignment
 
-Version `0.3.0` adds the second parity layer:
+Version `0.3.0` added the second parity layer:
 
 - `references/templates/` with compact templates for concept, GDD, systems, UX, art, architecture, sprint, QA, release, and changelog work.
 - `references/roles/` with the full 49-role studio roster adapted into Codex review lenses.
 - `references/rules/` with 11 coding and content standards adapted from Claude path-scoped rules.
 - `references/engines/` with Godot, Unity, Unreal, and web-specific guidance.
-- Existing skills now route to the new references through progressive disclosure.
+- Existing skills route to the new references through progressive disclosure.
+
+## Phase 3 alignment
+
+Version `0.4.0` adds the third parity layer:
+
+- `tests/skill-catalog.json` as a lightweight equivalent of the CCGS skill catalog.
+- `references/quality-rubric.md` for skill, reference, workflow, and release quality checks.
+- `scripts/validate_repository.py` for no-dependency repository validation.
+- `.github/workflows/validate.yml` to run validation on pushes and pull requests.
 
 ## Why consolidate
 
@@ -38,7 +47,7 @@ Codex skills are most useful when they provide concise routing and load detailed
 
 Good next additions:
 
-- A lightweight skill validation catalog inspired by the CCGS Skill Testing Framework.
-- GitHub Actions for plugin and skill validation.
 - More detailed engine modules for Godot, Unity, and Unreal.
 - Optional marketplace metadata and screenshots.
+- Forward-test examples for each skill.
+- Optional release tags and changelog automation.
