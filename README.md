@@ -6,8 +6,11 @@ This repository is designed to be shared on GitHub and installed as a Codex plug
 
 ## What is included
 
+- `game-studio-onboarding`: project onboarding, phase detection, engine routing, and Claude command translation.
 - `game-studio-flow`: project routing, milestone planning, task breakdown, vertical slices, and production rhythm.
 - `game-studio-design`: game concept work, core loops, systems, balance, UX, playtest feedback, and design reviews.
+- `game-studio-architecture`: architecture docs, ADRs, engine technical planning, and control manifests.
+- `game-studio-gate`: phase gates, readiness checks, story completion reviews, and advisory verdicts.
 - `game-studio-qa`: smoke tests, regression checks, playtest reports, bug triage, and evidence collection.
 - `game-studio-release`: release readiness, launch checklists, patch notes, hotfix flow, and post-release retrospectives.
 
@@ -24,8 +27,11 @@ Clone this repository, then install it through the Codex plugin flow for local p
 After installing, ask Codex for tasks such as:
 
 ```text
+Find my current game development phase and tell me what to do next.
 Help me turn this game idea into a one-week playable prototype.
 Review my combat design and identify the highest-risk assumptions.
+Create an ADR for my save system.
+Check whether my project can move from systems design to technical setup.
 Create a smoke test checklist for my Godot build.
 Prepare a launch checklist and patch notes template.
 ```
@@ -36,15 +42,20 @@ Prepare a launch checklist and patch notes template.
 .codex-plugin/
   plugin.json
 skills/
+  game-studio-onboarding/
   game-studio-flow/
   game-studio-design/
+  game-studio-architecture/
+  game-studio-gate/
   game-studio-qa/
   game-studio-release/
 references/
-  studio-workflow.md
-  role-routing.md
-  templates.md
+  command-mapping.md
   engine-routing.md
+  role-routing.md
+  studio-workflow.md
+  templates.md
+  workflow-catalog.md
 ```
 
 ## Design principles
@@ -55,15 +66,15 @@ references/
 4. Separate concept, systems, implementation, QA, and release concerns without creating ceremony for its own sake.
 5. Preserve attribution. This project is inspired by and partially adapted from Claude Code Game Studios.
 
-## Differences from Claude Code Game Studios
+## Claude Code Game Studios parity
 
 Claude Code Game Studios uses Claude Code-specific agents, slash commands, hooks, status lines, and tool names. Codex Game Studio converts the useful workflow content into Codex skills:
 
-- No `.claude/settings.json` hooks.
-- No Claude Code slash command dependency.
-- No automatic 49-agent roster.
-- No `AskUserQuestion` or Claude tool frontmatter.
-- Codex-native skill frontmatter with only `name` and `description`.
+- Claude slash commands map to Codex skills through `references/command-mapping.md`.
+- Phase progression maps to `references/workflow-catalog.md`.
+- Claude subagents map to role lenses in `references/role-routing.md`.
+- Claude hooks are not ported yet; validation currently relies on explicit Codex checks.
+- Codex-native skill frontmatter uses only `name` and `description`.
 
 ## Attribution
 
@@ -73,4 +84,4 @@ If you publish this repository, keep the attribution and MIT license text.
 
 ## Status
 
-Version `0.1.0` is a practical first migration. It favors a maintainable Codex-native workflow over a complete mechanical port.
+Version `0.2.0` adds the first parity layer: onboarding, phase gates, architecture workflow, command mapping, and a Codex-native workflow catalog.
