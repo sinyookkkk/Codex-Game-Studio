@@ -2,6 +2,10 @@
 
 Use this reference to decide which studio perspective Codex should simulate during a game development task. Do not pretend these are autonomous agents. Treat them as review lenses.
 
+For the full 49-role roster, read `references/roles/studio-roles.md`.
+
+## Quick routing
+
 | Lens | Use when | Main question |
 | --- | --- | --- |
 | Producer | Planning, milestones, scope, risk, cross-discipline coordination. | Can this ship with the available time and evidence? |

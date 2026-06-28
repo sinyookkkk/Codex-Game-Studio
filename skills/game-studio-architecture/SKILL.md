@@ -1,6 +1,6 @@
 ---
 name: game-studio-architecture
-description: Game architecture and technical planning workflow for Codex. Use when the user needs a technical design document, architecture review, ADR, control manifest, engine architecture, module boundaries, save/input/build decisions, or migration from design docs to implementation-ready technical plans.
+description: Game architecture and technical planning workflow for Codex. Use when the user needs a technical design document, architecture review, ADR, control manifest, engine architecture, module boundaries, save/input/build decisions, coding rules, or migration from design docs to implementation-ready technical plans.
 ---
 
 # Game Studio Architecture
@@ -10,9 +10,11 @@ Use this skill to turn game design into implementation-ready technical structure
 ## Required references
 
 - Read `../../references/workflow-catalog.md` when architecture readiness depends on phase.
-- Read `../../references/engine-routing.md` when engine-specific patterns matter.
-- Read `../../references/role-routing.md` when choosing technical review lenses.
-- Read `../../references/templates.md` for compact architecture and ADR structures.
+- Read `../../references/engine-routing.md`, then the matching `../../references/engines/*.md` file when engine-specific patterns matter.
+- Read `../../references/role-routing.md` and `../../references/roles/studio-roles.md` when choosing technical review lenses.
+- Read `../../references/templates/technical-design-document.md` for technical designs.
+- Read `../../references/templates/architecture-decision-record.md` for ADRs.
+- Read relevant files from `../../references/rules/` when architecture affects code standards.
 
 ## Architecture workflow
 
@@ -26,58 +28,6 @@ Use this skill to turn game design into implementation-ready technical structure
 4. Identify decisions that deserve ADRs.
 5. Produce an implementation control manifest: rules programmers must follow.
 6. Include verification commands or manual checks.
-
-## Output
-
-```markdown
-## Architecture Summary
--
-
-## Layers
-| Layer | Responsibility | Key files or modules |
-| --- | --- | --- |
-
-## Required Decisions
-| Decision | Options | Recommendation | Why now |
-| --- | --- | --- | --- |
-
-## Control Manifest
-- Rule:
-- Applies to:
-- Verification:
-
-## Risks
-| Risk | Impact | Mitigation |
-| --- | --- | --- |
-
-## Next Implementation Step
--
-```
-
-## ADR format
-
-```markdown
-# ADR: [Decision]
-
-## Status
-Accepted / Proposed / Superseded
-
-## Context
--
-
-## Options
-| Option | Pros | Cons |
-| --- | --- | --- |
-
-## Decision
--
-
-## Consequences
--
-
-## Verification
--
-```
 
 ## Guardrails
 

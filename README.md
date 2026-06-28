@@ -14,6 +14,13 @@ This repository is designed to be shared on GitHub and installed as a Codex plug
 - `game-studio-qa`: smoke tests, regression checks, playtest reports, bug triage, and evidence collection.
 - `game-studio-release`: release readiness, launch checklists, patch notes, hotfix flow, and post-release retrospectives.
 
+## Second-stage parity assets
+
+- `references/templates/`: compact document templates for concepts, GDDs, systems, UX, art, architecture, sprint planning, QA, release, and changelogs.
+- `references/roles/`: 49 studio role cards adapted into Codex review lenses.
+- `references/rules/`: 11 coding and content rules adapted from Claude Code Game Studios path-scoped rules.
+- `references/engines/`: Godot, Unity, Unreal, and web-specific routing notes.
+
 The plugin intentionally does not port every Claude Code slash command one-for-one. Codex works better with a smaller set of high-signal skills and references that load progressively.
 
 ## Installation
@@ -28,8 +35,8 @@ After installing, ask Codex for tasks such as:
 
 ```text
 Find my current game development phase and tell me what to do next.
-Help me turn this game idea into a one-week playable prototype.
-Review my combat design and identify the highest-risk assumptions.
+Draft a game concept using the Codex Game Studio template.
+Review my combat design with game designer, UX, and QA lenses.
 Create an ADR for my save system.
 Check whether my project can move from systems design to technical setup.
 Create a smoke test checklist for my Godot build.
@@ -52,19 +59,14 @@ skills/
 references/
   command-mapping.md
   engine-routing.md
+  engines/
   role-routing.md
-  studio-workflow.md
+  roles/
+  rules/
+  templates/
   templates.md
   workflow-catalog.md
 ```
-
-## Design principles
-
-1. Keep the user in control. Codex recommends, drafts, and verifies; the developer decides.
-2. Build playable evidence early. Every plan should name how the game will be run and tested.
-3. Guard scope. Prefer a smaller game that reaches professional quality over a large plan that never becomes playable.
-4. Separate concept, systems, implementation, QA, and release concerns without creating ceremony for its own sake.
-5. Preserve attribution. This project is inspired by and partially adapted from Claude Code Game Studios.
 
 ## Claude Code Game Studios parity
 
@@ -72,7 +74,9 @@ Claude Code Game Studios uses Claude Code-specific agents, slash commands, hooks
 
 - Claude slash commands map to Codex skills through `references/command-mapping.md`.
 - Phase progression maps to `references/workflow-catalog.md`.
-- Claude subagents map to role lenses in `references/role-routing.md`.
+- Claude subagents map to role lenses in `references/roles/studio-roles.md`.
+- Claude path-scoped rules map to `references/rules/`.
+- Claude document templates map to `references/templates/`.
 - Claude hooks are not ported yet; validation currently relies on explicit Codex checks.
 - Codex-native skill frontmatter uses only `name` and `description`.
 
@@ -84,4 +88,4 @@ If you publish this repository, keep the attribution and MIT license text.
 
 ## Status
 
-Version `0.2.0` adds the first parity layer: onboarding, phase gates, architecture workflow, command mapping, and a Codex-native workflow catalog.
+Version `0.3.0` adds the second parity layer: template library, role cards, coding rules, and engine-specific references.

@@ -1,123 +1,23 @@
 # Templates
 
-Use these compact templates when the user asks Codex to create or review game planning artifacts.
+This file is a quick index. For full templates, use files under `references/templates/`.
 
-## Game concept
+## Common mappings
 
-```markdown
-# Game Concept
+| Need | Template |
+| --- | --- |
+| Game concept | `references/templates/game-concept.md` |
+| System GDD | `references/templates/game-design-document.md` |
+| Systems map | `references/templates/systems-index.md` |
+| Art bible | `references/templates/art-bible.md` |
+| UX spec | `references/templates/ux-spec.md` |
+| Technical design | `references/templates/technical-design-document.md` |
+| ADR | `references/templates/architecture-decision-record.md` |
+| Sprint plan | `references/templates/sprint-plan.md` |
+| QA test plan | `references/templates/test-plan.md` |
+| Test evidence | `references/templates/test-evidence.md` |
+| Vertical slice report | `references/templates/vertical-slice-report.md` |
+| Release checklist | `references/templates/release-checklist.md` |
+| Release notes | `references/templates/release-notes.md` |
 
-## Pitch
-- One sentence:
-- Target player:
-- Platform:
-
-## Pillars
-1.
-2.
-3.
-
-## Core Loop
-1. Player action:
-2. System response:
-3. Reward or consequence:
-4. Reason to repeat:
-
-## Prototype Question
-- The prototype only needs to prove:
-- Success looks like:
-- Stop if:
-```
-
-## System design
-
-```markdown
-# System Design: [Name]
-
-## Purpose
-- Player problem solved:
-- Pillar supported:
-
-## Rules
-- Inputs:
-- State:
-- Outputs:
-- Failure cases:
-
-## Tuning
-| Variable | Starting value | Reason |
-| --- | --- | --- |
-
-## Acceptance Criteria
-- [ ] Runnable in game.
-- [ ] Clear player feedback.
-- [ ] Tested with at least one success and one failure path.
-```
-
-## Sprint plan
-
-```markdown
-# Sprint Plan
-
-## Goal
-- Playable outcome:
-- Not included:
-
-## Tasks
-| Priority | Task | Owner lens | Estimate | Acceptance check |
-| --- | --- | --- | --- | --- |
-
-## Risks
-| Risk | Impact | Mitigation |
-| --- | --- | --- |
-
-## Verification
-- Run:
-- Observe:
-- Pass:
-```
-
-## Playtest report
-
-```markdown
-# Playtest Report
-
-## Build
-- Version:
-- Date:
-- Tester profile:
-
-## Tasks Observed
-| Task | Completed? | Notes |
-| --- | --- | --- |
-
-## Findings
-| Severity | Finding | Evidence | Recommendation |
-| --- | --- | --- | --- |
-
-## Next Test Question
--
-```
-
-## Release checklist
-
-```markdown
-# Release Checklist
-
-## Build
-- Version:
-- Platform:
-- Build command:
-
-## Required Checks
-- [ ] Starts from clean install.
-- [ ] Main loop is playable.
-- [ ] Settings, save, pause, restart, and quit paths work.
-- [ ] Known issues documented.
-- [ ] Patch notes drafted.
-
-## Ship Decision
-- Ship / hold:
-- Reason:
-- Follow-up:
-```
+Load only the template required for the user's task.

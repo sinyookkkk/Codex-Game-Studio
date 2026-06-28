@@ -12,13 +12,23 @@ This repository is not a mechanical copy of Claude Code Game Studios. It is a Co
 
 ## Phase 1 alignment
 
-Version `0.2.0` adds the first parity layer:
+Version `0.2.0` added the first parity layer:
 
 - `game-studio-onboarding` for `/start`, `/help`, `/project-stage-detect`, `/setup-engine`, and `/adopt` style work.
 - `game-studio-gate` for `/gate-check`, `/story-readiness`, `/story-done`, `/design-review`, and related readiness reviews.
 - `game-studio-architecture` for `/create-architecture`, `/architecture-decision`, `/architecture-review`, and `/create-control-manifest`.
 - `references/workflow-catalog.md` as the Codex-native phase catalog.
 - `references/command-mapping.md` as the Claude slash command translation table.
+
+## Phase 2 alignment
+
+Version `0.3.0` adds the second parity layer:
+
+- `references/templates/` with compact templates for concept, GDD, systems, UX, art, architecture, sprint, QA, release, and changelog work.
+- `references/roles/` with the full 49-role studio roster adapted into Codex review lenses.
+- `references/rules/` with 11 coding and content standards adapted from Claude path-scoped rules.
+- `references/engines/` with Godot, Unity, Unreal, and web-specific guidance.
+- Existing skills now route to the new references through progressive disclosure.
 
 ## Why consolidate
 
@@ -28,8 +38,7 @@ Codex skills are most useful when they provide concise routing and load detailed
 
 Good next additions:
 
-- `references/templates/` with the most important GDD, ADR, UX, art bible, QA, and release templates.
-- `references/roles/` with role cards adapted from the 49 Claude agents.
-- `references/rules/` with coding standards adapted from Claude path-scoped rules.
-- Engine-specific references for Godot, Unity, and Unreal.
 - A lightweight skill validation catalog inspired by the CCGS Skill Testing Framework.
+- GitHub Actions for plugin and skill validation.
+- More detailed engine modules for Godot, Unity, and Unreal.
+- Optional marketplace metadata and screenshots.

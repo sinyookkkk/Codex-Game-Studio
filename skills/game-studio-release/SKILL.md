@@ -1,6 +1,6 @@
 ---
 name: game-studio-release
-description: Game release workflow for Codex. Use for launch readiness, release checklists, build packaging, known issues, patch notes, hotfix triage, day-one patch planning, release retrospectives, and post-launch maintenance for indie games.
+description: Game release workflow for Codex. Use for launch readiness, release checklists, build packaging, known issues, patch notes, changelog generation, hotfix triage, day-one patch planning, release retrospectives, and post-launch maintenance for indie games.
 ---
 
 # Game Studio Release
@@ -9,9 +9,11 @@ Use this skill when work shifts from building features to shipping, stabilizing,
 
 ## Required references
 
-- Read `../../references/templates.md` for release checklist and patch notes structure.
-- Read `../../references/engine-routing.md` when packaging differs by engine.
-- Read `../../references/role-routing.md` when release decisions need production, QA, and technical lenses.
+- Read `../../references/templates/release-checklist.md` for release readiness.
+- Read `../../references/templates/release-notes.md` or `../../references/templates/changelog-template.md` for player-facing and internal notes.
+- Read `../../references/engine-routing.md`, then the matching `../../references/engines/*.md` file when packaging differs by engine.
+- Read `../../references/role-routing.md` and `../../references/roles/studio-roles.md` when release decisions need production, QA, technical, community, or localization lenses.
+- Read `../../references/rules/test-standards.md` when deciding whether evidence is sufficient.
 
 ## Release process
 
@@ -21,36 +23,6 @@ Use this skill when work shifts from building features to shipping, stabilizing,
 4. Confirm save, settings, input, resolution, audio, pause, restart, and quit behavior.
 5. Draft player-facing notes.
 6. Decide ship, hold, or hotfix.
-
-## Release output
-
-```markdown
-## Release Status
-- Version:
-- Platform:
-- Channel:
-- Verdict: Ship / Hold / Hotfix
-
-## Blockers
-| Issue | Impact | Required fix |
-| --- | --- | --- |
-
-## Known Issues
-| Issue | Player workaround | Follow-up |
-| --- | --- | --- |
-
-## Checklist
-- [ ] Clean launch.
-- [ ] Main loop playable.
-- [ ] Save or progress behavior verified.
-- [ ] Settings verified.
-- [ ] Input verified.
-- [ ] Quit path verified.
-- [ ] Patch notes drafted.
-
-## Patch Notes Draft
--
-```
 
 ## Guardrails
 

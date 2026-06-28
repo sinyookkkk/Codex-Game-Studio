@@ -1,46 +1,22 @@
 # Engine Routing
 
-Use this reference when the user has chosen or is choosing an engine.
+Use this reference when the user has chosen or is choosing an engine. For detailed guidance, load one file from `references/engines/`.
 
-## Godot
+| Engine | Load | Best for |
+| --- | --- | --- |
+| Godot | `references/engines/godot.md` | Small to mid-sized 2D/3D indie games, fast iteration, open-source workflows. |
+| Unity | `references/engines/unity.md` | Mobile, cross-platform commercial pipelines, C# teams, asset-store-heavy workflows. |
+| Unreal | `references/engines/unreal.md` | High-fidelity 3D, complex animation, multiplayer-heavy work, Blueprint/C++ teams. |
+| Web | `references/engines/web.md` | Small experiments, jam games, portfolio games, fast distribution. |
 
-Best for small to mid-sized 2D and 3D indie games, fast iteration, open-source workflows, and lightweight tooling. Prefer GDScript unless the project needs C# ecosystem integration or heavier architecture.
+## Selection questions
 
-Check:
-- `project.godot` exists.
-- Scenes are small and composable.
-- Input actions are configured.
-- Export presets exist before release.
-- Smoke tests can run headless when possible.
+1. What platform must ship first?
+2. Is the project 2D, stylized 3D, high-fidelity 3D, or browser-first?
+3. What language and engine does the developer already know?
+4. Does the project need asset-store workflows, native extensions, multiplayer replication, or web distribution?
+5. What is the smallest runnable prototype path?
 
-## Unity
+## Guardrail
 
-Best for mobile, cross-platform commercial pipelines, asset-store-heavy workflows, and teams already comfortable with C#. Prefer clear assembly boundaries and avoid overengineering ECS unless the scale demands it.
-
-Check:
-- Unity version is pinned.
-- Packages are documented.
-- Scenes and prefabs have ownership rules.
-- Build targets are known.
-- Play mode and edit mode tests cover risky systems.
-
-## Unreal
-
-Best for high-fidelity 3D, complex animation, multiplayer-heavy work, and Blueprint/C++ hybrid teams. Be explicit about what lives in Blueprint versus C++.
-
-Check:
-- Engine version is pinned.
-- Gameplay framework ownership is clear.
-- Replication rules are documented if multiplayer exists.
-- Packaging settings are tested early.
-- Performance budgets are defined for target hardware.
-
-## Web
-
-Best for small experiments, jam games, portfolio games, and fast distribution. Keep the first loop tiny and test browser input, audio unlock, scaling, and save storage early.
-
-Check:
-- Game fits mobile or desktop target deliberately.
-- Canvas sizing is stable.
-- Assets load reliably.
-- Keyboard, pointer, and touch behavior are tested.
+Do not recommend an engine based only on popularity. Recommend the engine that lowers risk for the first playable proof.

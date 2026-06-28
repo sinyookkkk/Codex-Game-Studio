@@ -1,6 +1,6 @@
 ---
 name: game-studio-design
-description: Game design and design-review workflow for Codex. Use for game concepts, GDDs, core loops, mechanics, systems, economy, balance, difficulty curves, UX, onboarding, player psychology, playtest findings, and design risk review.
+description: Game design and design-review workflow for Codex. Use for game concepts, GDDs, core loops, mechanics, systems, economy, balance, difficulty curves, UX, onboarding, player psychology, playtest findings, art bible work, narrative design, level design, and design risk review.
 ---
 
 # Game Studio Design
@@ -9,9 +9,12 @@ Use this skill to evaluate or create design decisions through player behavior, f
 
 ## Required references
 
-- Read `../../references/templates.md` when drafting concepts, systems, or playtest reports.
-- Read `../../references/role-routing.md` when the design needs separate creative, systems, UX, or production lenses.
-- Read `../../references/studio-workflow.md` when the design decision affects project phase or readiness.
+- Read `../../references/templates.md` to choose a template.
+- Read a specific file from `../../references/templates/` when drafting concepts, systems, UX, art bible, levels, economy, difficulty, or narrative artifacts.
+- Read `../../references/role-routing.md` when the design needs separate creative, systems, UX, art, narrative, or production lenses.
+- Read `../../references/roles/studio-roles.md` when a specialized role lens is needed.
+- Read `../../references/workflow-catalog.md` when the design decision affects project phase or readiness.
+- Read `../../references/rules/design-docs.md` when creating or reviewing design documentation.
 
 ## Design process
 
@@ -39,31 +42,6 @@ When reviewing existing design, lead with issues ordered by severity:
 - Prototype question:
 - Metric or observation:
 - Pass signal:
-```
-
-## Creation format
-
-When creating a concept or system, keep the first draft compact:
-
-```markdown
-## Concept
-- Pitch:
-- Target player:
-- Pillars:
-
-## Core Loop
-1.
-2.
-3.
-
-## MVP Systems
-| System | Purpose | Risk |
-| --- | --- | --- |
-
-## First Prototype
-- Proves:
-- Includes:
-- Excludes:
 ```
 
 ## Guardrails

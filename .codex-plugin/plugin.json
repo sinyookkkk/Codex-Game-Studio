@@ -1,6 +1,6 @@
 {
   "name": "codex-game-studio",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A Codex plugin that turns game ideas, design docs, and playable builds into structured studio workflows.",
   "author": {
     "name": "Codex Game Studio Contributors"
@@ -19,7 +19,7 @@
   "interface": {
     "displayName": "Codex Game Studio",
     "shortDescription": "Plan, design, build, test, and ship indie games with Codex.",
-    "longDescription": "Codex Game Studio adapts the studio-style workflow popularized by Claude Code Game Studios into a compact Codex plugin. It provides focused skills for onboarding, concept design, production planning, architecture, QA, phase gates, and release readiness without depending on Claude Code slash commands, hooks, or subagents.",
+    "longDescription": "Codex Game Studio adapts the studio-style workflow popularized by Claude Code Game Studios into a Codex plugin with onboarding, design, architecture, production, QA, release, role lenses, template assets, coding rules, and engine-specific references.",
     "developerName": "Codex Game Studio Contributors",
     "category": "Productivity",
     "capabilities": [
@@ -28,8 +28,8 @@
     ],
     "defaultPrompt": [
       "Find my current game development phase.",
-      "Check if my project can advance phases.",
-      "Plan my next playable milestone."
+      "Draft a GDD using the game studio templates.",
+      "Review my project with the right studio roles."
     ],
     "brandColor": "#2563EB"
   }
