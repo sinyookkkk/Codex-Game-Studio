@@ -11,12 +11,29 @@ from typing import Any, Iterator
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PLACEHOLDER_PATTERNS = ("[TODO", "TBD", "your-name")
+PLACEHOLDER_PATTERNS = ("[TO" + "DO", "T" + "BD", "your" + "-name")
 REQUIRED_ROOTS = (
     ".codex-plugin/plugin.json",
-    "TODOS.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    ".github/ISSUE_TEMPLATE/bug_report.md",
+    ".github/ISSUE_TEMPLATE/feature_request.md",
+    ".github/PULL_REQUEST_TEMPLATE.md",
     "docs/codex-usage-guide.md",
+    "docs/demo-transcripts/README.md",
+    "docs/examples/README.md",
+    "docs/release-process.md",
     "references/codex-adaptation-map.md",
+    "references/engine-modules/README.md",
+    "references/roles/coordination-recipes.md",
+    "references/templates/accessibility-requirements.md",
+    "references/templates/pitch-document.md",
+    "references/templates/player-journey.md",
+    "references/templates/incident-response.md",
+    "references/templates/post-mortem.md",
+    "references/templates/collaborative-protocols.md",
+    "scripts/render_forward_tests.py",
     "skills",
     "references",
     "references/templates",
@@ -25,8 +42,11 @@ REQUIRED_ROOTS = (
     "references/engines",
     "tests/skill-catalog.json",
     "tests/forward-tests.json",
+    "tests/expected-outputs",
     "references/quality-rubric.md",
 )
+ENGINES = ("godot", "unity", "unreal", "web")
+ENGINE_MODULES = ("input", "ui", "save", "build", "networking", "performance", "rendering")
 
 
 def fail(message: str) -> None:
@@ -37,7 +57,7 @@ def fail(message: str) -> None:
 def load_json(path: Path) -> dict[str, Any]:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
-    except Exception as exc:  # pragma: no cover - diagnostic path
+    except Exception as exc:
         fail(f"Could not parse JSON {path.relative_to(ROOT)}: {exc}")
 
 
@@ -60,6 +80,19 @@ def parse_frontmatter(path: Path) -> dict[str, str]:
     return data
 
 
+def validate_required_paths() -> None:
+    if (ROOT / "TODOS.md").exists():
+        fail("TODOS.md should be removed after tracked migration work is complete")
+    for rel in REQUIRED_ROOTS:
+        if not (ROOT / rel).exists():
+            fail(f"Missing required path: {rel}")
+    for engine in ENGINES:
+        for module in ENGINE_MODULES:
+            path = ROOT / "references" / "engine-modules" / engine / f"{module}.md"
+            if not path.exists():
+                fail(f"Missing engine module reference: {path.relative_to(ROOT)}")
+
+
 def validate_plugin() -> None:
     manifest = load_json(ROOT / ".codex-plugin" / "plugin.json")
     for field in ("name", "version", "description", "license", "skills", "interface"):
@@ -71,12 +104,6 @@ def validate_plugin() -> None:
         fail("plugin.json version must be semver")
     if manifest["skills"] != "./skills/":
         fail("plugin.json skills must be ./skills/")
-
-
-def validate_required_paths() -> None:
-    for rel in REQUIRED_ROOTS:
-        if not (ROOT / rel).exists():
-            fail(f"Missing required path: {rel}")
 
 
 def validate_skills() -> set[str]:
@@ -103,16 +130,11 @@ def validate_catalog(skills: set[str]) -> None:
         fail("tests/skill-catalog.json missing skills list")
     catalog_names = {entry.get("name") for entry in entries}
     if catalog_names != skills:
-        missing = sorted(skills - catalog_names)
-        extra = sorted(catalog_names - skills)
-        fail(f"Skill catalog mismatch. Missing={missing} Extra={extra}")
+        fail(f"Skill catalog mismatch. Missing={sorted(skills - catalog_names)} Extra={sorted(catalog_names - skills)}")
     for entry in entries:
         if entry.get("priority") not in {"critical", "high", "medium", "low"}:
             fail(f"Invalid priority for {entry.get('name')}")
-        refs = entry.get("required_references", [])
-        if not refs:
-            fail(f"Catalog entry {entry.get('name')} has no required references")
-        validate_reference_list(refs, f"Catalog entry {entry.get('name')}")
+        validate_reference_list(entry.get("required_references", []), f"Catalog entry {entry.get('name')}")
 
 
 def validate_forward_tests(skills: set[str]) -> None:
@@ -122,9 +144,7 @@ def validate_forward_tests(skills: set[str]) -> None:
         fail("tests/forward-tests.json missing cases list")
     case_skills = {case.get("skill") for case in cases}
     if case_skills != skills:
-        missing = sorted(skills - case_skills)
-        extra = sorted(case_skills - skills)
-        fail(f"Forward-test skill coverage mismatch. Missing={missing} Extra={extra}")
+        fail(f"Forward-test skill coverage mismatch. Missing={sorted(skills - case_skills)} Extra={sorted(case_skills - skills)}")
     for index, case in enumerate(cases, start=1):
         label = f"Forward test case {index} ({case.get('skill')})"
         if not isinstance(case.get("prompt"), str) or len(case["prompt"].strip()) < 40:
@@ -132,13 +152,15 @@ def validate_forward_tests(skills: set[str]) -> None:
         evidence = case.get("expected_evidence")
         if not isinstance(evidence, list) or len(evidence) < 3:
             fail(f"{label} needs at least three expected evidence checks")
-        refs = case.get("required_references")
-        if not isinstance(refs, list) or not refs:
-            fail(f"{label} needs required_references")
-        validate_reference_list(refs, label)
+        validate_reference_list(case.get("required_references", []), label)
+        expected_path = case.get("expected_output_path")
+        if not isinstance(expected_path, str) or not (ROOT / expected_path).exists():
+            fail(f"{label} has missing expected_output_path: {expected_path}")
 
 
 def validate_reference_list(refs: list[str], label: str) -> None:
+    if not isinstance(refs, list) or not refs:
+        fail(f"{label} needs required references")
     for rel in refs:
         if not isinstance(rel, str) or not rel:
             fail(f"{label} has invalid reference path: {rel!r}")
@@ -148,7 +170,7 @@ def validate_reference_list(refs: list[str], label: str) -> None:
 
 def iter_checked_text_files() -> Iterator[Path]:
     ignored_parts = {".git"}
-    checked_suffixes = {".md", ".json", ".yml", ".yaml"}
+    checked_suffixes = {".md", ".json", ".yml", ".yaml", ".py", ".ps1", ".sh"}
     for path in ROOT.rglob("*"):
         if not path.is_file() or path.suffix not in checked_suffixes:
             continue
@@ -173,10 +195,7 @@ def validate_no_control_characters() -> None:
             if char in allowed:
                 continue
             if ord(char) < 32 or ord(char) == 127:
-                fail(
-                    f"Control character U+{ord(char):04X} found in "
-                    f"{path.relative_to(ROOT)} at offset {index}"
-                )
+                fail(f"Control character U+{ord(char):04X} found in {path.relative_to(ROOT)} at offset {index}")
 
 
 def main() -> None:
@@ -187,7 +206,7 @@ def main() -> None:
     validate_forward_tests(skills)
     validate_no_placeholders()
     validate_no_control_characters()
-    print(f"Repository validation passed: {len(skills)} skills, {len(skills)} forward tests")
+    print(f"Repository validation passed: {len(skills)} skills, {len(skills)} forward tests, {len(ENGINES) * len(ENGINE_MODULES)} engine modules")
 
 
 if __name__ == "__main__":
