@@ -43,3 +43,4 @@ Version `0.7.0` adds the deep studio-intelligence layer:
 - Security, audit, session lifecycle, and cost-control references.
 - Deeper Godot, Unity, and Unreal specialist notes.
 - Command-level specs for high-risk workflow commands.
+The deep parity checklist is documented in migration notes and validation rules rather than committed as a TODO file.

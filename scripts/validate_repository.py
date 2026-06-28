@@ -14,7 +14,6 @@ ROOT = Path(__file__).resolve().parents[1]
 PLACEHOLDER_PATTERNS = ("[TO" + "DO", "T" + "BD", "your" + "-name")
 REQUIRED_ROOTS = (
     ".codex-plugin/plugin.json",
-    "TODOS.md",
     "CHANGELOG.md",
     "CONTRIBUTING.md",
     "SECURITY.md",
